@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+  gamdom-front:
+    container_name: gamdom-front
+    build:
+      dockerfile: Dockerfile
+      context: ./GamDom-front
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+      - VITE_API_ROOT=http://localhost:3001
+    depends_on:
+      - gamdom-back
+
+  gamdom-back:
+    container_name: gamdom-back
+    build:
+      dockerfile: Dockerfile
+      context: ./GamDom-back
+    volumes:
+      - ./GamDom-back/src:/home/node/app/src
+    environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+      - PORT=3001
+      - DB_HOST=gamdom-postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=mysecretpassword
+      - DB_NAME=gamdom
+      - JWT_SECRET=mysecretkey
+      - JWT_EXPIRES_IN=1w
+    depends_on:
+      - postgres
+    ports:
+      - "3001:3001"
+
+  postgres:
+    container_name: gamdom-postgres
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=gamdom
+      - PGDATA=/data/postgres
+    volumes:
+      - postgres:/data/postgres
+
+volumes:
+  postgres:
+
+networks:
+  default:
+    name: gamdom-network
