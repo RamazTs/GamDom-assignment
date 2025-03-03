@@ -9,8 +9,7 @@ const Root: React.FC = () => {
       <h1 className="text-4xl font-bold mb-2 text-center mt-10">Welcome to the Sports Betting App</h1> 
       <p className="mt-4 text-lg text-gray-300 text-center">Your one-stop solution for all sports betting needs.</p>
 
-      {/* Navigation Window */}
-      <div className="mt-6 w-full max-w-3xl bg-gray-800 rounded-lg shadow-lg p-0"> {/* Increased max width */}
+      <div className="mt-6 w-full max-w-3xl bg-gray-800 rounded-lg shadow-lg p-0"> 
         <nav className="flex">
           <NavLink
             to="/events"
@@ -29,8 +28,8 @@ const Root: React.FC = () => {
             My Bets
           </NavLink>
         </nav>
-        <div className="p-4"> {/* Outlet area inside the navigation window */}
-          <Outlet /> {/* Render nested routes here */}
+        <div className="p-4"> 
+          <Outlet /> 
         </div>
       </div>
     </div>

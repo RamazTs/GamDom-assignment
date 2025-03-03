@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global styles for dark mode */
 body {
-  @apply bg-gray-900 text-white; /* Set dark background and light text */
+  @apply bg-gray-900 text-white;
 }
 
 input:focus {
-  outline: none; /* Remove the default outline */
-  box-shadow: none; /* Remove any box shadow */
+  outline: none;
+  box-shadow: none;
 }
