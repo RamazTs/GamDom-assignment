@@ -17,6 +17,8 @@ The react application will be avaialble on localhost:5173 and the backend will b
 To run e2e tests on the backend, execute the following command in backend folder:
 
 ```bash
+npm install
+
 npm run test
 ```
 
