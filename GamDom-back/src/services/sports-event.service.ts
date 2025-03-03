@@ -70,11 +70,18 @@ async function updateEvent({
 }
 
 async function deleteEvent(event_id: number): Promise<SportsEvent> {
-  return db
-    .deleteFrom("sports_events")
-    .where("event_id", "=", event_id)
-    .returningAll()
-    .executeTakeFirstOrThrow();
+  return db.transaction().execute(async (tx) => {
+    await tx
+      .deleteFrom("sports_event_bets")
+      .where("event_id", "=", event_id)
+      .execute();
+
+    return tx
+      .deleteFrom("sports_events")
+      .where("event_id", "=", event_id)
+      .returningAll()
+      .executeTakeFirstOrThrow();
+  });
 }
 
 async function createBet({

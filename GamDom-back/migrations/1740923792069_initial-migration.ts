@@ -38,6 +38,9 @@ export async function up(db: Kysely<unknown>): Promise<void> {
     .addColumn("created_at", "timestamp", (col) =>
       col.notNull().defaultTo(sql`now()`)
     )
+    .addForeignKeyConstraint("fk_event_id", ["event_id"], "sports_events", [
+      "event_id",
+    ])
     .execute();
 }
 
